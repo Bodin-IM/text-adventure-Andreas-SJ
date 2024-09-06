@@ -1,10 +1,10 @@
-import os
+from os import system
 from time import sleep
 
 def gameOver():
     print("Wow yea, you really died")
     input("Press Enter to continue...") 
-    os.system('clear||cls')
+    system('clear||cls')
     print("Game over")
     decision = input("Do you want to play again? (Yes/No) > ")
     if decision.lower() == 'yes':
@@ -16,7 +16,7 @@ def beginning():
     global karma
     karma = 1000
 
-    os.system('clear||cls')
+    system('clear||cls')
     print("You come back to your senses and continue your speech")
     sleep(5)
     print("Suddenly you see a weird glare in the distance and your bodyguard yelling")
@@ -33,7 +33,7 @@ def toDodgeOrNoToDodge():
         sleep(2)
         print("You suddenly hear a shot in the distance and it all goes black.")
         sleep(7)
-        os.system('clear||cls')
+        system('clear||cls')
         gameOver()
         
     else:
@@ -47,15 +47,16 @@ def toDodgeOrNoToDodge():
 
 def theAftermath():
     global karma  
-    os.system('clear||cls')
+    system('clear||cls')
     print("You get crowded by bodyguards using themselves as protection and making sure you get to the ground")
     sleep(7)
     print("the bullet was millimeters away from hitting you")
     input("Press Enter to continue...") 
-    os.system('clear||cls')
+    system('clear||cls')
 
-    print("The highest ranking member of the secret services present at the scene")
-    print("tells you that they have a shot on the shooter, it is your call as to whether they shoot or arrest him")
+    print("*you have been escorted to the back of the stage*")
+    print("The highest ranking member of the secret services present at the scene tells you that they have a shot on the shooter")
+    print("it is your call as to whether they shoot or arrest him")
     sleep(14)
     print("i want you to ---- him")
     answer = input("Cuff/Shoot > ")
@@ -67,13 +68,36 @@ def theAftermath():
         theArrest() 
 
 def theArrest():
-    global karma 
     print("arrest")
-    print(karma)
+    postArrest()
 
 def theShot():
-    global karma  
     print("shoot")
-    print(karma)
+    postShot()
 
+def postShot():
+    global karma
+    print("WTF man? I know he tried to assassinate you but wouldn't it be more satisfying to let him rot in jail?")
+    sleep(8)
+    print("1: Nah, he had it coming")
+    print("2: Good point")
+    input("> ")
+    if input == 1:
+        karma -= 200
+    else:
+        print("at least you show some remorse..")
+    secretServiceConversation()
+     
+def postArrest():
+    print("Good call")
+    sleep(3)
+    print("Now he will at least serve for his crimes")
+    input("Press Enter to continue...")
+    secretServiceConversation()
+
+def secretServiceConversation():
+    print("*you are back at the white house*")
+    print("")
+
+    input("Press Enter to continue...")
 beginning()

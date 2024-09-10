@@ -97,7 +97,34 @@ def postArrest():
 
 def secretServiceConversation():
     print("*you are back at the white house*")
-    print("")
-
+    print("SS agent Nolan:")
+    print("     I have to inform you that after a stunt like the one you just came back from")
+    sleep(7)
+    print("     We will have to keep you under a constant watch, no matter where you are going or want to go")
+    print("     you have to report to us an hour in advance")
+    sleep(8)
+    print("     and we will have to reinforce your office")
+    sleep(5)
     input("Press Enter to continue...")
+    SsConfrontation()
+
+def SsConfrontation():
+    global karma
+    print("You:")
+    sleep(3)
+    print("     Actually, you know what?")
+    sleep(2)
+    print("     screw this, i'm done with politics")
+    sleep(1)
+    print("     i'm out of here")
+    sleep(4)
+    print("SS agent Nolan:")
+    sleep(2)
+    print("     i")
+    print("     uhh")
+    sleep(3)
+    print("     are you sure?")
+    sleep(3)
+    print("Do you really want to quit politics altogether?")
+    input("Yes/No > ")
 beginning()

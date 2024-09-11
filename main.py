@@ -1,6 +1,7 @@
 from os import system
 from time import sleep
 
+
 def gameOver():
     print("Wow yea, you really died")
     input("Press Enter to continue...") 
@@ -15,8 +16,9 @@ def gameOver():
 def beginning():
     global karma
     karma = 1000
-
-    system('clear||cls')
+    global empty
+    empty = system('clear||cls')
+    empty
     print("You come back to your senses and continue your speech")
     sleep(5)
     print("Suddenly you see a weird glare in the distance and your bodyguard yelling")
@@ -25,6 +27,7 @@ def beginning():
     toDodgeOrNoToDodge()
 
 def toDodgeOrNoToDodge():
+    global empty
     sleep(5)
     print("Do you get down?")
     answer = input("Yes/No > ")
@@ -33,7 +36,7 @@ def toDodgeOrNoToDodge():
         sleep(2)
         print("You suddenly hear a shot in the distance and it all goes black.")
         sleep(7)
-        system('clear||cls')
+        empty
         gameOver()
         
     else:
@@ -47,13 +50,14 @@ def toDodgeOrNoToDodge():
 
 def theAftermath():
     global karma  
-    system('clear||cls')
+    global empty
+    empty
     print("You get crowded by bodyguards using themselves as protection and making sure you get to the ground")
     sleep(7)
     print("the bullet was millimeters away from hitting you")
     input("Press Enter to continue...") 
-    system('clear||cls')
-
+    empty
+    sleep(3)
     print("*you have been escorted to the back of the stage*")
     print("The highest ranking member of the secret services present at the scene tells you that they have a shot on the shooter")
     print("it is your call as to whether they shoot or arrest him")
@@ -77,6 +81,7 @@ def theShot():
 
 def postShot():
     global karma
+    global empty
     print("WTF man? I know he tried to assassinate you but wouldn't it be more satisfying to let him rot in jail?")
     sleep(8)
     print("1: Nah, he had it coming")
@@ -86,6 +91,7 @@ def postShot():
         karma -= 200
     else:
         print("at least you show some remorse..")
+        empty
     secretServiceConversation()
      
 def postArrest():
@@ -96,6 +102,7 @@ def postArrest():
     secretServiceConversation()
 
 def secretServiceConversation():
+    sleep(5)
     print("*you are back at the white house*")
     print("SS agent Nolan:")
     print("     I have to inform you that after a stunt like the one you just came back from")
@@ -107,6 +114,54 @@ def secretServiceConversation():
     sleep(5)
     input("Press Enter to continue...")
     SsConfrontation()
+
+def YouKeepDoingPolitics():
+    global empty
+    paranoid = 1
+    sleep(4)
+    print("*after that stressfull day you decide to go for a walk")
+    sleep(4)
+    print("You feel a bit paranoid")
+    sleep(2)
+    print("Do you look behind you?")
+    answer = input("Yes/No > ")
+    if answer.lower() == 'No':
+        paranoid = 2
+        print("*you see a silhouette getting out of your view just a second too fast for you to properly identify them")
+        sleep(5)
+        print("*Your fight or flight kicks in")
+    else:
+        print("You:")
+        print("     Eh, it's probably nothing")
+    
+    print("*you keep walking ")
+    sleep("3")
+    print("then you hear a glass bottle rolling down the street")
+    if paranoid == 2:
+        print("You:")
+        print("     A bottle doesn't just start rolling on it's own")
+        sleep(3)
+        print("     Someone is close, i'm out of here")
+        sleep(2)
+    else:
+        print("You:")
+        sleep(2)
+        print("     It's probably just a stray cat")
+        input("Press Enter to continue...")
+        empty
+        print("*You hear some footsteps right behind you")
+        sleep(1)
+        print("*You try to pull a quick manuever when you feel a warm pain in your back")
+        sleep(5)
+        print("*The footsteps you heard were another assassin")
+        sleep(4)
+        input("Press Enter to continue...")
+        empty
+        print("You die a slow death in the middle of the street")
+        input("Press Enter to continue...")
+        empty
+        gameOver()
+
 
 def SsConfrontation():
     global karma
@@ -126,5 +181,10 @@ def SsConfrontation():
     print("     are you sure?")
     sleep(3)
     print("Do you really want to quit politics altogether?")
-    input("Yes/No > ")
+    answer = input("Yes/No > ")
+    if answer.lower() == 'Yes':
+        print("You said yes")
+    else:
+        YouKeepDoingPolitics()
+
 beginning()

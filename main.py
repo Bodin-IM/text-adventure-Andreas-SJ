@@ -113,6 +113,7 @@ def secretServiceConversation():
     print("     and we will have to reinforce your office")
     sleep(5)
     input("Press Enter to continue...")
+    empty
     SsConfrontation()
 
 def YouKeepDoingPolitics():
@@ -143,6 +144,11 @@ def YouKeepDoingPolitics():
         sleep(3)
         print("     Someone is close, i'm out of here")
         sleep(2)
+        print("*you start sprinting away")
+        input("Press Enter to continue...")
+        empty
+        
+
     else:
         print("You:")
         sleep(2)
@@ -161,6 +167,38 @@ def YouKeepDoingPolitics():
         input("Press Enter to continue...")
         empty
         gameOver()
+
+def GettingAnewJob():
+    global name
+    global karma
+    global empty
+    print("After getting your life threatened and quitting your position as the president")
+    print("it isn't easy to fake your identity")
+    sleep(5)
+    print("You are going to need a new name")
+    name = input("What is your new name? > ")
+    sleep(4)
+    print(f"{name} sounds like a great name, no one will be able to recognize you now")
+    print("*you walk over to the closest Target to apply for a job")
+    sleep(2)
+    input("Press Enter to continue...")
+    empty 
+    sleep(2)
+    print("*You walk over to the cashier")
+    sleep(5)
+    print("You have just started a completely new life, you decide what happens to it")
+    sleep (5)
+    print("Just keep that in mind")
+    sleep ("4")
+    print("Do you make a good or bad introduction?")
+    choice = input("Good/Bad > ")
+    if choice.lower() == 'Bad':
+        karma -= 400
+        print("You:")
+        print("     Yo, give me a job")
+        print("Cashier:")
+        print("     Excuse you?")
+
 
 
 def SsConfrontation():
@@ -183,8 +221,7 @@ def SsConfrontation():
     print("Do you really want to quit politics altogether?")
     answer = input("Yes/No > ")
     if answer.lower() == 'Yes':
-        print("You said yes")
+        GettingAnewJob()
     else:
         YouKeepDoingPolitics()
-
 beginning()

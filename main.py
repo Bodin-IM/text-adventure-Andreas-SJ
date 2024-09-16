@@ -1,5 +1,6 @@
 from os import system
 from time import sleep
+import workingInStore
 
 
 def gameOver():

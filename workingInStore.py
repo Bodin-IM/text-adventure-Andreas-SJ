@@ -1,8 +1,10 @@
 from random import randint
 from random import randrange
 from time import sleep
+from os import system
 
-count = 0
+global clear
+clear = system('clear||cls')
 
 def customersCash():
     kroner = randrange(0, 100, 1)
@@ -28,33 +30,35 @@ def cashCheck(price, kroner, tiere, hundre):
 def calculatePrice():
     totalPrice = 0
     priceLookup = {
-        "toiletPaper": 40,
-        "toothBrush": 40,
-        "toothPaste": 40,
+        "toiletpaper": 40,
+        "toothbrush": 40,
+        "toothpaste": 40,
         "banana": 28,
         "milk": 23,
         "bread": 50,
-        "hotDog": 50,
-        "carrotCake": 60,
+        "hot dog": 50,
+        "carrot cake": 60,
         "candy": 169,
-        "pancakeWithChocolate": 18,
-        "chickenDrumstick": 17,
+        "chocolate pancake": 18,
+        "chicken drumstick": 17,
         "cigar": 169,
-        "fishBurger": 300,
+        "fish burger": 300,
     }
+
+    priceLookup_lower = {key.lower(): value for key, value in priceLookup.items()}
 
     while True:
         product = input("Write the product name (or 'exit' to cancel) > ")
 
-        if product == "exit":
+        if product.lower() == "exit":
             print("Purchase cancelled.")
             break
-        elif product == "calculate":
+        elif product.lower() == "total":
             print(f"Total Price: {totalPrice}")
-            break
-        elif product in priceLookup:
-            totalPrice += priceLookup[product]
-            print(f"Added {product}, price: {priceLookup[product]}")
+            
+        elif product.lower() in priceLookup_lower:
+            totalPrice += priceLookup_lower[product.lower()]
+            print(f"Added {product.lower()}, price: {priceLookup_lower[product.lower()]}")
         else:
             print("Product not found.")
 

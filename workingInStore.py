@@ -12,46 +12,51 @@ def customersCash():
 
 def cashCheck(price, kroner, tiere, hundre):
     if kroner + tiere + hundre <= price:
-        print("Det går nok ikke, det er for lite penger")
-        print("Prøv igjen")
+        print("That does unfortunately not work, that is too little money")
+        print("Try Again")
         paymentSuccessful = 1
         
     elif kroner + tiere + hundre >= price:
-        print("Det er for mange penger, husk å gi tilbake overskuddet")
+        print("That is too much money, remember to give them the change")
         paymentSuccessful = 2
 
     elif kroner + tiere + hundre == price:
-        print("Det er en perfekt mengde penger")
+        print("That is just the right amount of money")
         paymentSuccessful = 3
     return paymentSuccessful
 
-def products():
-    product = input("Hvilke produkt ønsker kunden å kjøpe? > ")
-    
+def calculatePrice():
+    totalPrice = 0
+    priceLookup = {
+        "toiletPaper": 40,
+        "toothBrush": 40,
+        "toothPaste": 40,
+        "banana": 28,
+        "milk": 23,
+        "bread": 50,
+        "hotDog": 50,
+        "carrotCake": 60,
+        "candy": 169,
+        "pancakeWithChocolate": 18,
+        "chickenDrumstick": 17,
+        "cigar": 169,
+        "fishBurger": 300,
+    }
+
     while True:
-        price = 0
-        if product.lower() == 'dopapir':
-            price += 40
-            print(price)
-        elif product.lower() == 'tannbørste':
-            price += 40
-        elif product.lower() == 'tannkrem':
-            price += 40
-        elif product.lower() == 'banan':
-            price += 28
-        elif product.lower() == 'melk':
-            price += 23
-        elif product.lower() == 'brød':
-            price += 50
-        elif product.lower() == 'grillpølse':
-            price += 50
-        elif product.lower() == 'gulrotkake':
-            price += 60
-        elif product.lower() == 'det var alt':
-            detVarAlt()
+        product = input("Write the product name (or 'exit' to cancel) > ")
+
+        if product == "exit":
+            print("Purchase cancelled.")
+            break
+        elif product == "calculate":
+            print(f"Total Price: {totalPrice}")
+            break
+        elif product in priceLookup:
+            totalPrice += priceLookup[product]
+            print(f"Added {product}, price: {priceLookup[product]}")
         else:
-            print("Error, prøv igjen. Stavet du det riktig?")
-    return price
+            print("Product not found.")
 
 def detVarAlt(price):
     print(price)
@@ -63,4 +68,4 @@ def detVarAlt(price):
     else:
         print("fis")
 
-products()
+calculatePrice()

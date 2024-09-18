@@ -6,7 +6,7 @@ import workingInStore
 def gameOver():
     print("Wow yea, you really died")
     input("Press Enter to continue...") 
-    system('clear||cls')
+    global empty
     print("Game over")
     decision = input("Do you want to play again? (Yes/No) > ")
     if decision.lower() == 'yes':

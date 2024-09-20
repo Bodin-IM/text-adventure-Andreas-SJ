@@ -1,5 +1,8 @@
 from random import randint
 from random import randrange
+from shoppingVariables import priceLookup
+from shoppingVariables import randomWelcomeMessages
+from shoppingVariables import randomCustomer
 from time import sleep
 from os import system
 
@@ -10,135 +13,26 @@ def customersCash():
     kroner = randrange(0, 100, 1)
     tiere = randrange(0, 100, 10)
     hundre = randrange(0, 1000, 100)
-    return kroner, tiere, hundre
+    money = kroner + tiere + hundre
+    return money
 
-def cashCheck(price, kroner, tiere, hundre):
-    if kroner + tiere + hundre <= price:
+def cashCheck(money, price):
+    if money <= price:
         print("That does unfortunately not work, that is too little money")
         print("Try Again")
         paymentSuccessful = 1
         
-    elif kroner + tiere + hundre >= price:
+    elif money >= price:
         print("That is too much money, remember to give them the change")
         paymentSuccessful = 2
 
-    elif kroner + tiere + hundre == price:
+    elif money == price:
         print("That is just the right amount of money")
         paymentSuccessful = 3
     return paymentSuccessful
 
-def calculatePrice():
+def calculatePrice(priceLookup):
     totalPrice = 0
-    priceLookup = {
-        "toiletpaper": 40,
-        "toothbrush": 40,
-        "toothpaste": 40,
-        "banana": 28,
-        "milk": 23,
-        "bread": 50,
-        "hot dog": 50,
-        "carrot cake": 60,
-        "candy": 169,
-        "chocolate pancake": 18,
-        "chicken drumstick": 17,
-        "cigar": 169,
-        "fish burger": 300,
-        "paprika": 70,
-        "apple": 15,
-        "orange": 20,
-        "grapes": 35,
-        "watermelon": 45,
-        "pineapple": 50,
-        "strawberries": 60,
-        "blueberries": 70,
-        "raspberries": 80,
-        "blackberries": 90,
-        "kiwi": 25,
-        "mango": 30,
-        "peach": 35,
-        "plum": 40,
-        "pear": 45,
-        "nectarine": 50,
-        "apricot": 55,
-        "cherries": 60,
-        "fig": 65,
-        "pomegranate": 70,
-        "avocado": 75,
-        "lemon": 20,
-        "lime": 25,
-        "cucumber": 30,
-        "tomato": 35,
-        "lettuce": 40,
-        "spinach": 45,
-        "kale": 50,
-        "broccoli": 55,
-        "cauliflower": 60,
-        "zucchini": 65,
-        "eggplant": 70,
-        "bell pepper": 75,
-        "jalapeno": 80,
-        "habanero": 85,
-        "potato": 90,
-        "sweet potato": 95,
-        "onion": 100,
-        "garlic": 105,
-        "ginger": 110,
-        "carrot": 115,
-        "celery": 120,
-        "radish": 125,
-        "beet": 130,
-        "turnip": 135,
-        "parsnip": 140,
-        "rutabaga": 145,
-        "butternut squash": 150,
-        "acorn squash": 155,
-        "spaghetti squash": 160,
-        "pumpkin": 165,
-        "corn": 30,
-        "peas": 25,
-        "green beans": 35,
-        "asparagus": 40,
-        "brussels sprouts": 45,
-        "artichoke": 50,
-        "mushroom": 55,
-        "cabbage": 20,
-        "bok choy": 25,
-        "collard greens": 30,
-        "mustard greens": 35,
-        "swiss chard": 40,
-        "arugula": 45,
-        "endive": 50,
-        "radicchio": 55,
-        "watercress": 60,
-        "alfalfa sprouts": 20,
-        "bean sprouts": 25,
-        "snow peas": 30,
-        "snap peas": 35,
-        "okra": 40,
-        "egg": 10,
-        "cheese": 50,
-        "yogurt": 20,
-        "butter": 30,
-        "cream": 25,
-        "sour cream": 30,
-        "cottage cheese": 35,
-        "cream cheese": 40,
-        "milkshake": 45,
-        "ice cream": 50,
-        "frozen yogurt": 55,
-        "gelato": 60,
-        "sorbet": 65,
-        "popsicle": 10,
-        "frozen pizza": 70,
-        "frozen vegetables": 30,
-        "frozen fruit": 35,
-        "frozen dinners": 80,
-        "frozen waffles": 25,
-        "frozen pancakes": 20,
-        "frozen french fries": 30,
-        "frozen chicken nuggets": 40,
-    }
-
     priceLookupLower = {key.lower(): value for key, value in priceLookup.items()}
 
     while True:
@@ -166,4 +60,21 @@ def detVarAlt(price):
     else:
         print("fis")
 
-calculatePrice()
+def aNewBeginning(randomWelcomeMessages):
+    sleep(3)
+    print("Welcome to your frist day here with us! We at Joja Mart can't wait to work with you!")
+    sleep(2)
+    print("Start by walking into the store")
+    sleep(2)
+    print("\033[1;32;40m Do you walk into the store? \n")
+    decision = input("\033[1;32;40m Yes/No > \n")
+    if decision.lower() == "yes":
+        print("\033[1;37;40m \n")
+        theFirstDay(randomWelcomeMessages)
+
+def theFirstDay(randomWelcomeMessages):
+    print(randomWelcomeMessages)
+    sleep(2)
+    print(f"You get behind the cashier as the first customer {randomCustomer} approaches you")
+
+aNewBeginning(randomWelcomeMessages)

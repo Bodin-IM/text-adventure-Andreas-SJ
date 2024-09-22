@@ -77,4 +77,4 @@ def theFirstDay(randomWelcomeMessages):
     sleep(2)
     print(f"You get behind the cashier as the first customer {randomCustomer} approaches you")
 
-aNewBeginning(randomWelcomeMessages)
+calculatePrice(priceLookup)

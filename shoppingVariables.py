@@ -107,6 +107,8 @@ priceLookup = {
         "frozen pancakes": 20,
         "frozen french fries": 30,
         "frozen chicken nuggets": 40,
+        "period pads": 0,
+        "tampons": 0,
 }
 
 welcomeMessages = [
@@ -132,8 +134,6 @@ welcomeMessages = [
     "You enter the store, the sight of neatly arranged products and the hum of activity filling the space.",
     "Walking into the store, the cool air and the sight of fully stocked shelves bring a sense of calm."
 ]
-
-randomWelcomeMessages = choice(welcomeMessages)
 
 customerList = [
     
@@ -227,8 +227,28 @@ customerList = [
     "Shane",
     "Vincent",
     "Willy",
-    "Wizard"
+    "Wizard",
+    "Jhon Nolan",
+    "Lucy Chen",
+    "Mille Edgar Andersen",
+    "Nyla Harper",
+    "Angela Lopez",
+    "Wade Grey",
+    "Tim Bradford",
+    "Jackson West",
+    "Celena Juarez",
+    "Tamara Colins",
+    "Bruce Wayne",
+    "Zoe Andersen",
+    "Nell Forester",
+    "Skiptracer Randy",
+    "Bailey Nune",
+    "Lila Town",
+    "Officer Quigley Smitty",
+    "Wesley Evers",
+    "Aaron Thorsen"
 
 ]
 
 randomCustomer = choice(customerList)
+inventory = {product: 10 for product in priceLookup}

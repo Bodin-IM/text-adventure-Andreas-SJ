@@ -1,228 +1,144 @@
-from os import system
-from time import sleep
-import workingInStore
+import random
+from shoppingVariables import priceLookup, customerList, inventory, welcomeMessages
 
+points = 0
+restock_items = []
+special_items = {"bonus_card": False, "manager_approval": False}
 
-def gameOver():
-    print("Wow yea, you really died")
-    input("Press Enter to continue...") 
-    global empty
-    print("Game over")
-    decision = input("Do you want to play again? (Yes/No) > ")
-    if decision.lower() == 'yes':
-        beginning()
-    else: 
-        quit()
+def print_commands(commands):
+    print("\nCommands:")
+    for command in commands:
+        print(f"- {command}")
 
-def beginning():
-    global karma
-    karma = 1000
-    global empty
-    empty = system('clear||cls')
-    empty
-    print("You come back to your senses and continue your speech")
-    sleep(5)
-    print("Suddenly you see a weird glare in the distance and your bodyguard yelling")
-    sleep(3)
-    print("GET DOWN!")
-    toDodgeOrNoToDodge()
+def get_input(prompt, options):
+    while True:
+        choice = input(prompt).lower()
+        if choice in options:
+            return choice
+        else:
+            print("Invalid input, please try again.")
 
-def toDodgeOrNoToDodge():
-    global empty
-    sleep(5)
-    print("Do you get down?")
-    answer = input("Yes/No > ")
-
-    if answer.lower() in ['no']:
-        sleep(2)
-        print("You suddenly hear a shot in the distance and it all goes black.")
-        sleep(7)
-        empty
-        gameOver()
-        
-    else:
-        sleep(2)
-        print("You dodged the bullet")
-        sleep(2)
-        print("but barely")
-        sleep(5)
-        input("Press Enter to continue...") 
-        theAftermath()
-
-def theAftermath():
-    global karma  
-    global empty
-    empty
-    print("You get crowded by bodyguards using themselves as protection and making sure you get to the ground")
-    sleep(7)
-    print("the bullet was millimeters away from hitting you")
-    input("Press Enter to continue...") 
-    empty
-    sleep(3)
-    print("*you have been escorted to the back of the stage*")
-    print("The highest ranking member of the secret services present at the scene tells you that they have a shot on the shooter")
-    print("it is your call as to whether they shoot or arrest him")
-    sleep(14)
-    print("i want you to ---- him")
-    answer = input("Cuff/Shoot > ")
-    if answer.lower() == 'shoot':
-        karma -= 100
-        theShot()
-    else:
-        karma += 35
-        theArrest() 
-
-def theArrest():
-    print("arrest")
-    postArrest()
-
-def theShot():
-    print("shoot")
-    postShot()
-
-def postShot():
-    global karma
-    global empty
-    print("WTF man? I know he tried to assassinate you but wouldn't it be more satisfying to let him rot in jail?")
-    sleep(8)
-    print("1: Nah, he had it coming")
-    print("2: Good point")
-    input("> ")
-    if input == 1:
-        karma -= 200
-    else:
-        print("at least you show some remorse..")
-        empty
-    secretServiceConversation()
-     
-def postArrest():
-    print("Good call")
-    sleep(3)
-    print("Now he will at least serve for his crimes")
-    input("Press Enter to continue...")
-    secretServiceConversation()
-
-def secretServiceConversation():
-    sleep(5)
-    print("*you are back at the white house*")
-    print("SS agent Nolan:")
-    print("     I have to inform you that after a stunt like the one you just came back from")
-    sleep(7)
-    print("     We will have to keep you under a constant watch, no matter where you are going or want to go")
-    print("     you have to report to us an hour in advance")
-    sleep(8)
-    print("     and we will have to reinforce your office")
-    sleep(5)
-    input("Press Enter to continue...")
-    empty
-    SsConfrontation()
-
-def YouKeepDoingPolitics():
-    global empty
-    paranoid = 1
-    sleep(4)
-    print("*after that stressfull day you decide to go for a walk")
-    sleep(4)
-    print("You feel a bit paranoid")
-    sleep(2)
-    print("Do you look behind you?")
-    answer = input("Yes/No > ")
-    if answer.lower() == 'No':
-        paranoid = 2
-        print("*you see a silhouette getting out of your view just a second too fast for you to properly identify them")
-        sleep(5)
-        print("*Your fight or flight kicks in")
-    else:
-        print("You:")
-        print("     Eh, it's probably nothing")
+def interact_with_customer(customer):
+    print(f"\nA customer named {customer} approaches the cashier.")
     
-    print("*you keep walking ")
-    sleep("3")
-    print("then you hear a glass bottle rolling down the street")
-    if paranoid == 2:
-        print("You:")
-        print("     A bottle doesn't just start rolling on it's own")
-        sleep(3)
-        print("     Someone is close, i'm out of here")
-        sleep(2)
-        print("*you start sprinting away")
-        input("Press Enter to continue...")
-        empty
-        
+    print(f"{customer}: 'Hi, how's your day going?'")
+    
+    print_commands(["good", "bad", "small talk", "stay silent"])
+    response = get_input("How would you like to respond? ", ["good", "bad", "small talk", "stay silent"])
 
-    else:
-        print("You:")
-        sleep(2)
-        print("     It's probably just a stray cat")
-        input("Press Enter to continue...")
-        empty
-        print("*You hear some footsteps right behind you")
-        sleep(1)
-        print("*You try to pull a quick manuever when you feel a warm pain in your back")
-        sleep(5)
-        print("*The footsteps you heard were another assassin")
-        sleep(4)
-        input("Press Enter to continue...")
-        empty
-        print("You die a slow death in the middle of the street")
-        input("Press Enter to continue...")
-        empty
-        gameOver()
+    if response == "good":
+        print(f"You: 'It's going well! How about yours?'")
+        print(f"{customer}: 'Glad to hear! I'm just doing some quick shopping.'")
+    elif response == "bad":
+        print(f"You: 'Not the best day, but it is what it is.'")
+        print(f"{customer}: 'Sorry to hear that, hope it gets better.'")
+    elif response == "small talk":
+        print(f"You: 'Busy day, huh?'")
+        print(f"{customer}: 'Yeah, this store is always packed around this time.'")
+    elif response == "stay silent":
+        print(f"You stay silent, and {customer} awkwardly proceeds to unload their cart.")
 
-def GettingAnewJob():
-    global name
-    global karma
-    global empty
-    print("After getting your life threatened and quitting your position as the president")
-    print("it isn't easy to fake your identity")
-    sleep(5)
-    print("You are going to need a new name")
-    name = input("What is your new name? > ")
-    sleep(4)
-    print(f"{name} sounds like a great name, no one will be able to recognize you now")
-    print("*you walk over to the closest Target to apply for a job")
-    sleep(2)
-    input("Press Enter to continue...")
-    empty 
-    sleep(2)
-    print("*You walk over to the cashier")
-    sleep(5)
-    print("You have just started a completely new life, you decide what happens to it")
-    sleep (5)
-    print("Just keep that in mind")
-    sleep ("4")
-    print("Do you make a good or bad introduction?")
-    choice = input("Good/Bad > ")
-    if choice.lower() == 'Bad':
-        karma -= 400
-        print("You:")
-        print("     Yo, give me a job")
-        print("Cashier:")
-        print("     Excuse you?")
+    print(f"{customer} starts unloading their cart for you to scan.")
+    return True
 
+def scan_customer():
+    global points
+    customer = random.choice(customerList)
+    
+    if interact_with_customer(customer):
+        cart = random.sample(list(priceLookup.keys()), random.randint(1, 4))
+        total = 0
+        restock_needed = False
 
+        print(f"{customer} has the following items in their cart:")
+        for item in cart:
+            if inventory[item] > 0:
+                inventory[item] -= 1
+                price = priceLookup[item]
+                total += price
+                print(f"- {item.capitalize()} (${price})")
+            else:
+                print(f"- {item.capitalize()} (Out of stock)")
+                restock_needed = True
 
-def SsConfrontation():
-    global karma
-    print("You:")
-    sleep(3)
-    print("     Actually, you know what?")
-    sleep(2)
-    print("     screw this, i'm done with politics")
-    sleep(1)
-    print("     i'm out of here")
-    sleep(4)
-    print("SS agent Nolan:")
-    sleep(2)
-    print("     i")
-    print("     uhh")
-    sleep(3)
-    print("     are you sure?")
-    sleep(3)
-    print("Do you really want to quit politics altogether?")
-    answer = input("Yes/No > ")
-    if answer.lower() == 'Yes':
-        GettingAnewJob()
-    else:
-        YouKeepDoingPolitics()
-beginning()
+        if restock_needed:
+            print("Some items are out of stock! Would you like to restock first?")
+            choice = get_input("Type 'yes' to restock or 'no' to continue: ", ["yes", "no"])
+            if choice == "yes":
+                restock()
+
+        print(f"Total for {customer}: ${total:.2f}")
+        points += total
+
+def restock():
+    global restock_items
+    print("\nTime to restock!")
+    available_items = list(priceLookup.keys())
+    
+    print(f"Your current restock inventory: {restock_items}")
+    print("Available items to restock:")
+    for i, item in enumerate(available_items, 1):
+        print(f"{i}. {item.capitalize()}")
+
+    choice = get_input("Choose an item to restock (enter number): ", [str(i) for i in range(1, len(available_items) + 1)])
+    restocked_item = available_items[int(choice) - 1]
+    inventory[restocked_item] += 5
+    restock_items.append(restocked_item)
+    print(f"Restocked 5 units of {restocked_item.capitalize()}!")
+
+def break_room():
+    global special_items
+    print("\nYou enter the break room. You can relax or take a bonus card.")
+    print_commands(["relax", "take bonus card", "leave"])
+    choice = get_input("What would you like to do? ", ["relax", "take bonus card", "leave"])
+
+    if choice == "relax":
+        print("You take a moment to relax and regain your energy!")
+    elif choice == "take bonus card":
+        special_items["bonus_card"] = True
+        print("You have taken the bonus card. It will boost your points on your next sale!")
+    elif choice == "leave":
+        print("Leaving the break room.")
+
+def stockroom():
+    print("\nYou enter the stockroom. Time to restock items!")
+    restock()
+
+def play_day():
+    print(welcomeMessages)
+    day_done = False
+    while not day_done:
+        print_commands(["scan", "restock", "inventory", "break room", "end day"])
+        action = get_input("What would you like to do? ", ["scan", "restock", "inventory", "break room", "end day"])
+
+        if action == "scan":
+            scan_customer()
+        elif action == "restock":
+            stockroom()
+        elif action == "inventory":
+            print("\nCurrent inventory:")
+            for item, qty in inventory.items():
+                print(f"{item.capitalize()}: {qty}")
+        elif action == "break room":
+            break_room()
+        elif action == "end day":
+            print(f"Ending the day. You earned {points:.2f} points today!")
+            day_done = True
+
+def play_store():
+    print("\nWelcome to the Grocery Store!")
+    day = 1
+    max_days = 7
+
+    while day <= max_days:
+        print(f"\n--- Day {day} ---")
+        play_day()
+
+        if day != max_days:
+            print(f"\nEnd of Day {day}. Get ready for Day {day + 1}!")
+        else:
+            print(f"\nYou finished 7 days at the grocery store. Total points earned: {points:.2f}")
+
+        day += 1
+
+play_store()
